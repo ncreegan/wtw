@@ -1,10 +1,10 @@
 // hardcode expected temperatures and rain
-var morning = 28;
+var morning = 66;
 var morningRain = false;
-var afternoon = 34;
+var afternoon =70;
 var afternoonRain = false;
-var evening = 30;
-var eveningRain = true;
+var evening = 84;
+var eveningRain = false;
 
 // establish rules
 if (morning <= 35 || afternoon <= 35 || evening <= 35) {
@@ -16,6 +16,9 @@ else if (morningRain == true || afternoonRain == true || eveningRain == true) {
 else {
   if (morning <= 50 || afternoon <= 50 || evening <= 50) {
     console.log("Wear a bomber jacket.");
+  }
+  else if (morning >= 85 || afternoon >= 85 || evening >= 85) {
+    console.log("Wear a light shirt");
   }
   else if (morning <= 65 || afternoon <= 65 || evening <= 65) {
     console.log("Wear a light jacket");
