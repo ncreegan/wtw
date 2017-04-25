@@ -1,3 +1,6 @@
+// require request package for http calls
+var request = require('request');
+
 // hardcode expected temperatures and rain
 var morning = 66;
 var morningRain = false;
