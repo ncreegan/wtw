@@ -1,13 +1,21 @@
-// require request package for http calls
-var request = require('request');
-
 // hardcode expected temperatures and rain
 var morning = 66;
 var morningRain = false;
-var afternoon =70;
+var afternoon = 70;
 var afternoonRain = false;
 var evening = 84;
 var eveningRain = false;
+
+// require request package for http calls
+var request = require('request');
+
+// test request package
+request
+  .get('https://api.darksky.net/forecast/97e29242ad32d4fb278063ed32204618/37.8267,-122.4233')
+  .on('response', function(response) {
+    console.log(response.statusCode)
+    console.log(response.headers['content-type'])
+  })
 
 // establish rules
 if (morning <= 35 || afternoon <= 35 || evening <= 35) {
