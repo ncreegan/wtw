@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ncreegan/wtw/issues"
   },
-  "homepage": "https://github.com/ncreegan/wtw#readme"
+  "homepage": "https://github.com/ncreegan/wtw#readme",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
 }
