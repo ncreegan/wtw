@@ -2,7 +2,7 @@
 var request = require('request');
 
 
-request("https://api.darksky.net/forecast/97e29242ad32d4fb278063ed32204618/37.8267,-122.4233?exclude=['currently','minutely','daily','alerts','flags']",
+request("https://api.darksky.net/forecast/97e29242ad32d4fb278063ed32204618/40.7360,-73.9904?exclude=['currently','minutely','daily','alerts','flags']",
 function(error, response, data) {
   var answer = JSON.parse(data);
 
