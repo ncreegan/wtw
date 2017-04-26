@@ -9,18 +9,6 @@ var eveningRain = false;
 // require request package for http calls
 var request = require('request');
 
-// test request package
-// request
-//  .get('https://api.darksky.net/forecast/97e29242ad32d4fb278063ed32204618/37.8267,-122.4233')
-//  .on('response', function(response) {
-//    console.log(response.statusCode)
-//    console.log(response.headers['content-type'])
-//    console.log(response.body)
-//  })
-
-var EventEmitter = require("events").EventEmitter;
-var body = new EventEmitter();
-
 
 request("https://api.darksky.net/forecast/97e29242ad32d4fb278063ed32204618/37.8267,-122.4233?exclude=['currently','minutely','daily','alerts','flags']",
 function(error, response, data) {
