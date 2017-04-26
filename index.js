@@ -1,11 +1,3 @@
-// hardcode expected temperatures and rain
-var morning = 66;
-var morningRain = false;
-var afternoon = 70;
-var afternoonRain = false;
-var evening = 84;
-var eveningRain = false;
-
 // require request package for http calls
 var request = require('request');
 
@@ -14,29 +6,41 @@ request("https://api.darksky.net/forecast/97e29242ad32d4fb278063ed32204618/37.82
 function(error, response, data) {
   var answer = JSON.parse(data);
 
-  console.log(typeof answer.hourly.data);
-  console.log(typeof answer.hourly.data[0].temperature);
+  var morningHour = 8;
+  var afternoonHour = 12;
+  var eveningHour = 18;
+  var currentHour = new Date().getHours();
+
+  var morningData = answer.hourly.data[morningHour - Math.ceil(currentHour)];
+  var afternoonData = answer.hourly.data[afternoonHour - Math.ceil(currentHour)];
+  var eveningData = answer.hourly.data[eveningHour - Math.ceil(currentHour)];
+
+  var result = weatherCheck(morningData, afternoonData, eveningData);
+
+  console.log(result);
 });
 
-
-// establish rules
-if (morning <= 35 || afternoon <= 35 || evening <= 35) {
-  console.log("Wear a parka.");
-}
-else if (morningRain == true || afternoonRain == true || eveningRain == true) {
-  console.log("Wear a rain jacket.");
-}
-else {
-  if (morning <= 50 || afternoon <= 50 || evening <= 50) {
-    console.log("Wear a bomber jacket.");
+function weatherCheck(morning, afternoon, evening){
+  // establish rules
+  console.log(morning);
+  if (morning.temperature <= 35 || afternoon.temperature <= 35 || evening.temperature <= 35) {
+    return "Wear a parka.";
   }
-  else if (morning >= 85 || afternoon >= 85 || evening >= 85) {
-    console.log("Wear a light shirt");
-  }
-  else if (morning <= 65 || afternoon <= 65 || evening <= 65) {
-    console.log("Wear a light jacket");
+  else if (morning.precipProbability >= .5 || afternoon.precipProbability >= .5 || evening.percipProbability >= .5) {
+    return "Wear a rain jacket.";
   }
   else {
-    console.log("Just wear a button-up");
+    if (morning.temperature <= 50 || afternoon.temperature <= 50 || evening.temperature <= 50) {
+      return "Wear a bomber jacket.";
+    }
+    else if (morning.temperature >= 85 || afternoon.temperature >= 85 || evening.temperature >= 85) {
+      return "Wear a light shirt";
+    }
+    else if (morning.temperature <= 65 || afternoon.temperature <= 65 || evening.temperature <= 65) {
+      return "Wear a light jacket";
+    }
+    else {
+      return "Just wear a button-up";
+    }
   }
-};
+}
