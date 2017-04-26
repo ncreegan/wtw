@@ -1,0 +1,19 @@
+{
+  "name": "wtw",
+  "version": "1.0.0",
+  "description": "What to wear.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ncreegan/wtw.git"
+  },
+  "author": "Nick Creegan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ncreegan/wtw/issues"
+  },
+  "homepage": "https://github.com/ncreegan/wtw#readme"
+}
