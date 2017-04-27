@@ -6,14 +6,24 @@ request("https://api.darksky.net/forecast/97e29242ad32d4fb278063ed32204618/40.73
 function(error, response, data) {
   var answer = JSON.parse(data);
 
-  var morningHour = 8;
+  var morningHour = 9;
   var afternoonHour = 12;
   var eveningHour = 18;
+  var tomMorning = 33;
+  var tomAfternoon = 36;
+  var tomEvening = 42;
   var currentHour = new Date().getHours();
-
-  var morningData = answer.hourly.data[morningHour - Math.ceil(currentHour)];
-  var afternoonData = answer.hourly.data[afternoonHour - Math.ceil(currentHour)];
-  var eveningData = answer.hourly.data[eveningHour - Math.ceil(currentHour)];
+  // if current time is after 9 am either skip morning data OR pull for the next day
+  if (currentHour > 9) {
+    var morningData = answer.hourly.data[tomMorning - Math.ceil(currentHour)];
+    var afternoonData = answer.hourly.data[tomAfternoon - Math.ceil(currentHour)];
+    var eveningData = answer.hourly.data[tomEvening - Math.ceil(currentHour)];
+  }
+  else {
+    var morningData = answer.hourly.data[morningHour - Math.ceil(currentHour)];
+    var afternoonData = answer.hourly.data[afternoonHour - Math.ceil(currentHour)];
+    var eveningData = answer.hourly.data[eveningHour - Math.ceil(currentHour)];
+  }
 
   var result = weatherCheck(morningData, afternoonData, eveningData);
 
@@ -22,7 +32,6 @@ function(error, response, data) {
 
 function weatherCheck(morning, afternoon, evening){
   // establish rules
-  console.log(morning);
   if (morning.temperature <= 35 || afternoon.temperature <= 35 || evening.temperature <= 35) {
     return "Wear a parka.";
   }
