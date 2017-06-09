@@ -1,6 +1,12 @@
 // require request package for http calls
 var request = require('request');
+var alexa = require ('alexa-app');
+var app = new alexa.app();
 
+app.launch(function(request, response){
+ response.say("Hello there, I am a bot created to help you figure out what to wear to work.");
+ response.shouldEndSession(false);
+})
 
 request("https://api.darksky.net/forecast/97e29242ad32d4fb278063ed32204618/40.7360,-73.9904?exclude=['currently','minutely','daily','alerts','flags']",
 function(error, response, data) {
